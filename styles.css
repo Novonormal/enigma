@@ -209,11 +209,12 @@ h1, h2, h3, .logo-text, .hero-title {
 }
 h1 {
   max-width: 890px;
-  font-size: clamp(3rem, 5.4vw, 5.85rem);
-  line-height: 1.02;
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: -.01em;
+  font-family: var(--font-body);
+  font-size: clamp(2.35rem, 4.6vw, 4.65rem);
+  line-height: 1.08;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: -.02em;
 }
 h2 {
   font-size: clamp(2.1rem, 3.15vw, 3.45rem);
