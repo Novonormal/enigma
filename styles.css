@@ -474,6 +474,8 @@ cite { color: var(--gold); font-style: normal; font-size: .88rem; }
 
 .modal-maioridade { position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center; padding: 1rem; background: rgba(0,0,0,.86); backdrop-filter: blur(12px); }
 .modal-box { width: min(100%, 440px); padding: 2rem; border: 1px solid rgba(231,194,123,.28); border-radius: 18px; background: linear-gradient(145deg, #120909, #050505); text-align: center; box-shadow: var(--shadow); }
+.modal-box > img,
+.modal-kiss { display: none !important; }
 .logo-modal { color: var(--red); font-family: var(--font-display); font-size: 2.2rem; font-weight: 400; letter-spacing: .08em; }
 .modal-botoes { display: grid; gap: .75rem; margin-top: 1.3rem; }
 .btn-sim, .btn-nao { min-height: 48px; border-radius: 999px; border: 0; cursor: pointer; }
