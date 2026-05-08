@@ -11,6 +11,8 @@ const DAYS = [
 let auth = JSON.parse(sessionStorage.getItem("enigmaAdm") || "null");
 let agenda = { days: {} };
 let currentDay = "segunda";
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "enigma2026";
 
 const $ = (id) => document.getElementById(id);
 const basicAuth = () => `Basic ${btoa(`${auth.user}:${auth.pass}`)}`;
@@ -57,6 +59,10 @@ const showPanel = async () => {
 $("login-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   auth = { user: $("adm-user").value.trim(), pass: $("adm-pass").value };
+  if (auth.user !== ADMIN_USER || auth.pass !== ADMIN_PASS) {
+    $("login-status").textContent = "Login inválido.";
+    return;
+  }
   const response = await fetch("/api/agenda", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: basicAuth() },

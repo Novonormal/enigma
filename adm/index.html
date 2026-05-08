@@ -13,8 +13,8 @@
       <section class="adm-card" id="login-view">
         <h1>Agenda Enigma</h1>
         <p>Login administrativo.</p>
-        <form id="login-form">
-          <label>UsuÃ¡rio<input id="adm-user" autocomplete="username" required></label>
+        <form id="login-form" class="adm-login">
+          <label>Usuário<input id="adm-user" autocomplete="username" required></label>
           <label>Senha<input id="adm-pass" type="password" autocomplete="current-password" required></label>
           <button class="btn btn-primary" type="submit">Entrar</button>
           <p class="adm-status" id="login-status"></p>
@@ -27,18 +27,162 @@
           <button class="btn btn-secondary" id="logout-button" type="button">Sair</button>
         </div>
         <div class="adm-tabs" id="day-tabs"></div>
-        <form class="adm-card" id="upload-form">
-          <h2 id="current-day">Segunda</h2>
-          <input id="flyer-file" type="file" accept="image/jpeg,image/png,image/webp">
-          <div class="adm-preview" id="preview"><span>Sem evento</span></div>
-          <div class="adm-actions">
-            <button class="btn btn-primary" type="submit">Salvar flyer</button>
-            <button class="btn btn-secondary" id="remove-button" type="button">Remover</button>
-          </div>
-          <p class="adm-status" id="panel-status"></p>
-        </form>
+        <div class="adm-grid">
+          <form class="adm-card" id="upload-form">
+            <h2 id="current-day">Segunda</h2>
+            <input id="flyer-file" type="file" accept="image/jpeg,image/png,image/webp">
+            <div class="adm-actions">
+              <button class="btn btn-primary" type="submit">Salvar flyer</button>
+              <button class="btn btn-secondary" id="remove-button" type="button">Remover</button>
+            </div>
+          </form>
+          <section class="adm-card">
+            <h2>Preview</h2>
+            <div class="adm-preview" id="preview"><span>Sem evento</span></div>
+            <p class="adm-status" id="panel-status"></p>
+          </section>
+        </div>
       </section>
     </main>
-    <script src="adm.js"></script>
+    <script>
+      const DAYS = [
+        ["segunda", "Segunda"],
+        ["terca", "Terça"],
+        ["quarta", "Quarta"],
+        ["quinta", "Quinta"],
+        ["sexta", "Sexta"],
+        ["sabado", "Sábado"],
+        ["domingo", "Domingo"],
+      ];
+
+      const ADMIN_USER = "admin";
+      const ADMIN_PASS = "enigma2026";
+      const STORAGE_KEY = "enigmaAdm";
+      const $ = (id) => document.getElementById(id);
+
+      let auth = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null");
+      let agenda = { days: {} };
+      let currentDay = "segunda";
+
+      const basicAuth = () => `Basic ${btoa(`${auth.user}:${auth.pass}`)}`;
+      const setStatus = (text) => { $("panel-status").textContent = text || ""; };
+      const setLoginStatus = (text) => { $("login-status").textContent = text || ""; };
+
+      const renderTabs = () => {
+        $("day-tabs").innerHTML = DAYS.map(([key, label]) =>
+          `<button class="adm-tab ${key === currentDay ? "is-active" : ""}" data-day="${key}" type="button">${label}</button>`
+        ).join("");
+        document.querySelectorAll(".adm-tab").forEach((button) => {
+          button.addEventListener("click", () => {
+            currentDay = button.dataset.day;
+            renderPanel();
+          });
+        });
+      };
+
+      const renderPreview = () => {
+        const item = agenda.days?.[currentDay];
+        $("preview").innerHTML = item?.src ? `<img src="${item.src}" alt="Preview do flyer">` : "<span>Sem evento</span>";
+      };
+
+      const renderPanel = () => {
+        $("current-day").textContent = DAYS.find(([key]) => key === currentDay)?.[1] || "Dia";
+        renderTabs();
+        renderPreview();
+      };
+
+      const loadAgenda = async () => {
+        try {
+          const response = await fetch("/api/agenda", { cache: "no-store" });
+          agenda = response.ok ? await response.json() : { days: {} };
+        } catch {
+          agenda = { days: {} };
+        }
+        renderPanel();
+      };
+
+      const showPanel = async () => {
+        $("login-view").hidden = true;
+        $("panel-view").hidden = false;
+        await loadAgenda();
+      };
+
+      $("login-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const user = $("adm-user").value.trim();
+        const pass = $("adm-pass").value;
+        if (user !== ADMIN_USER || pass !== ADMIN_PASS) {
+          setLoginStatus("Login inválido.");
+          return;
+        }
+        auth = { user, pass };
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(auth));
+        setLoginStatus("");
+        await showPanel();
+      });
+
+      $("logout-button").addEventListener("click", () => {
+        sessionStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      });
+
+      $("flyer-file").addEventListener("change", () => {
+        const file = $("flyer-file").files[0];
+        if (!file) return renderPreview();
+        const url = URL.createObjectURL(file);
+        $("preview").innerHTML = `<img src="${url}" alt="Preview do flyer">`;
+      });
+
+      $("upload-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const file = $("flyer-file").files[0];
+        if (!file) {
+          setStatus("Escolha uma imagem.");
+          return;
+        }
+        setStatus("Salvando...");
+        const base64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(String(reader.result).split(",")[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+        const response = await fetch("/api/agenda", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: basicAuth() },
+          body: JSON.stringify({ action: "upload", day: currentDay, filename: file.name, mime: file.type, base64 })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          setStatus(data.error || "Erro ao salvar.");
+          return;
+        }
+        agenda = data;
+        $("flyer-file").value = "";
+        renderPanel();
+        setStatus("Flyer salvo.");
+      });
+
+      $("remove-button").addEventListener("click", async () => {
+        setStatus("Removendo...");
+        const response = await fetch("/api/agenda", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: basicAuth() },
+          body: JSON.stringify({ action: "remove", day: currentDay })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          setStatus(data.error || "Erro ao remover.");
+          return;
+        }
+        agenda = data;
+        renderPanel();
+        setStatus("Flyer removido.");
+      });
+
+      if (auth?.user === ADMIN_USER && auth?.pass === ADMIN_PASS) {
+        showPanel();
+      }
+    </script>
   </body>
 </html>

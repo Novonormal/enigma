@@ -203,7 +203,7 @@ button, input, select, textarea { font: inherit; }
 .eyebrow { margin: 0 0 1rem; color: var(--gold); font-weight: 600; }
 h1, h2, h3, .logo-text, .hero-title {
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   letter-spacing: .02em;
   color: var(--cream);
 }
