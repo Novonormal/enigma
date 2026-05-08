@@ -1,0 +1,100 @@
+body {
+  min-height: 100svh;
+}
+
+.adm-shell {
+  width: min(100% - 2rem, 980px);
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 5rem) 0;
+}
+
+.adm-card,
+.adm-panel {
+  border: 1px solid rgba(231,194,123,.2);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(20,8,8,.92), rgba(0,0,0,.78));
+  padding: clamp(1.2rem, 4vw, 2rem);
+  box-shadow: var(--shadow);
+}
+
+.adm-card label {
+  display: grid;
+  gap: .35rem;
+  margin-top: 1rem;
+  color: rgba(255,243,223,.75);
+}
+
+.adm-card input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(0,0,0,.38);
+  color: var(--cream);
+  padding: .9rem;
+}
+
+.adm-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.adm-tabs {
+  display: flex;
+  gap: .55rem;
+  overflow-x: auto;
+  padding-bottom: .8rem;
+  margin-bottom: 1rem;
+}
+
+.adm-tab {
+  min-height: 44px;
+  border: 1px solid rgba(231,194,123,.2);
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  color: var(--cream);
+  padding: .65rem .9rem;
+  white-space: nowrap;
+}
+
+.adm-tab.is-active {
+  border-color: rgba(255,22,22,.52);
+  background: rgba(255,22,22,.18);
+}
+
+.adm-preview {
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+  margin: 1rem 0;
+  border: 1px dashed rgba(231,194,123,.28);
+  border-radius: 16px;
+  overflow: hidden;
+  color: rgba(255,243,223,.62);
+}
+
+.adm-preview img {
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: contain;
+}
+
+.adm-actions {
+  display: grid;
+  gap: .75rem;
+}
+
+.adm-status {
+  min-height: 1.4rem;
+  margin-top: 1rem;
+  color: var(--gold);
+}
+
+@media (min-width: 680px) {
+  .adm-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+}

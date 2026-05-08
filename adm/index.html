@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Agenda | Enigma</title>
+    <link rel="shortcut icon" href="../favicon.ico?v=kiss-20260506">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="adm.css">
+  </head>
+  <body>
+    <main class="adm-shell">
+      <section class="adm-card" id="login-view">
+        <h1>Agenda Enigma</h1>
+        <p>Login administrativo.</p>
+        <form id="login-form">
+          <label>Usuário<input id="adm-user" autocomplete="username" required></label>
+          <label>Senha<input id="adm-pass" type="password" autocomplete="current-password" required></label>
+          <button class="btn btn-primary" type="submit">Entrar</button>
+          <p class="adm-status" id="login-status"></p>
+        </form>
+      </section>
+
+      <section class="adm-panel" id="panel-view" hidden>
+        <div class="adm-top">
+          <div><p class="eyebrow">Painel</p><h1>Flyers da semana</h1></div>
+          <button class="btn btn-secondary" id="logout-button" type="button">Sair</button>
+        </div>
+        <div class="adm-tabs" id="day-tabs"></div>
+        <form class="adm-card" id="upload-form">
+          <h2 id="current-day">Segunda</h2>
+          <input id="flyer-file" type="file" accept="image/jpeg,image/png,image/webp">
+          <div class="adm-preview" id="preview"><span>Sem evento</span></div>
+          <div class="adm-actions">
+            <button class="btn btn-primary" type="submit">Salvar flyer</button>
+            <button class="btn btn-secondary" id="remove-button" type="button">Remover</button>
+          </div>
+          <p class="adm-status" id="panel-status"></p>
+        </form>
+      </section>
+    </main>
+    <script src="adm.js"></script>
+  </body>
+</html>
