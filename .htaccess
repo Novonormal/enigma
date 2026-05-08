@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^agenda/?$ agenda.php [L,QSA]
+RewriteRule ^adm/?$ adm/index.php [L,QSA]
+

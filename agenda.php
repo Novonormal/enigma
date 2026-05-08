@@ -1,0 +1,122 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__ . '/agenda-store.php';
+
+$agenda = enigma_public_agenda(enigma_load_agenda());
+$days = enigma_day_order();
+?>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agenda da Semana | Enigma Bar e Nightclub Campo Grande MS</title>
+    <meta name="description" content="Confira a agenda semanal da Enigma Bar e Nightclub em Campo Grande MS. Flyers atualizados por dia da semana.">
+    <link rel="canonical" href="/agenda">
+    <link rel="shortcut icon" href="./favicon.ico?v=kiss-20260506">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico?v=kiss-20260506">
+    <link rel="icon" type="image/png" sizes="1024x1024" href="./assets/favicon.png?v=kiss-20260506">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="./assets/apple-touch-icon.png?v=kiss-20260506">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="agenda.css">
+  </head>
+  <body data-page="agenda">
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+    <div id="modal-maioridade" class="modal-maioridade" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <div class="modal-box">
+        <div class="logo-modal">ENIGMA</div>
+        <h2 id="modal-titulo">Você tem 18 anos ou mais?</h2>
+        <p>Este site contém conteúdo destinado exclusivamente a maiores de 18 anos.</p>
+        <div class="modal-botoes">
+          <button id="btn-sim" class="btn-sim">Sim, tenho 18+</button>
+          <button id="btn-nao" class="btn-nao">Não</button>
+        </div>
+      </div>
+    </div>
+    <header class="site-header" data-header>
+      <div class="container header-inner">
+        <a href="index.html" class="logo" aria-label="Enigma Bar e Nightclub - Página inicial"><img src="assets/images/logo-enigma.png" alt="Logo Enigma"></a>
+        <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" data-menu-toggle><span></span><span></span><span></span></button>
+        <nav class="main-nav" data-menu>
+          <a href="index.html" data-nav="home">Início</a>
+          <a href="sobre.html" data-nav="sobre">A Casa</a>
+          <a href="servicos.html" data-nav="servicos">Serviços</a>
+          <a href="/agenda" data-nav="agenda">Agenda</a>
+          <a href="contato.html" data-nav="contato">Contato</a>
+        </nav>
+        <a class="btn btn-primary header-cta" href="#" data-whatsapp data-message="Olá, quero reservar na Enigma.">Reservar</a>
+      </div>
+    </header>
+    <main id="conteudo">
+      <section class="page-hero agenda-hero">
+        <div class="page-hero-media" aria-hidden="true"><img src="assets/images/palco-luzes-vermelhas.jpg" alt=""></div>
+        <div class="container page-hero-content reveal">
+          <p class="eyebrow">Agenda</p>
+          <h1>Flyers da semana</h1>
+          <p>Eventos da Enigma organizados de segunda a domingo.</p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="agenda-grid" aria-live="polite">
+            <?php foreach ($days as $day): ?>
+              <?php $item = $agenda['days'][$day] ?? null; ?>
+              <article class="agenda-card reveal">
+                <h2><?= htmlspecialchars(enigma_day_label($day), ENT_QUOTES, 'UTF-8') ?></h2>
+                <?php if (!empty($item['src'])): ?>
+                  <img src="<?= htmlspecialchars($item['src'], ENT_QUOTES, 'UTF-8') ?>" alt="Flyer da <?= htmlspecialchars(enigma_day_label($day), ENT_QUOTES, 'UTF-8') ?> na Enigma">
+                <?php else: ?>
+                  <div class="agenda-empty"><span>Sem evento</span></div>
+                <?php endif; ?>
+              </article>
+            <?php endforeach; ?>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-main">
+        <div class="footer-brand">
+          <h3>Enigma Bar e Nightclub</h3>
+          <p>A Enigma Bar e Nightclub é uma casa noturna tradicional em Campo Grande MS, com ambiente sofisticado, música, camarotes e experiências marcantes desde 1992.</p>
+          <div class="footer-redes">
+            <a href="https://www.instagram.com/enigma.nightclubcg?igsh=Y29ieXZqZmYwdXkz&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Enigma"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.1"></circle></svg></a>
+            <a class="footer-whatsapp" href="https://wa.me/5565999999999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp da Enigma"><img src="assets/whatsapp-float.svg" alt=""></a>
+          </div>
+        </div>
+        <nav class="footer-col" aria-label="Links principais">
+          <h3>Navegação</h3>
+          <a href="index.html">Início</a>
+          <a href="sobre.html">A Casa</a>
+          <a href="servicos.html">Serviços</a>
+          <a href="/agenda">Agenda</a>
+          <a href="contato.html">Contato</a>
+        </nav>
+        <div class="footer-col">
+          <h3>Serviços</h3>
+          <p>Música ao vivo e DJs</p>
+          <p>Camarotes e reservas</p>
+          <p>Eventos privados</p>
+          <p>Noites especiais</p>
+        </div>
+        <div class="footer-col">
+          <h3>Contato</h3>
+          <a href="https://wa.me/5565999999999" target="_blank" rel="noopener noreferrer">WhatsApp para reservas</a>
+          <p>Rua João Maluf, 297</p>
+          <p>Jardim Paulista, Campo Grande MS</p>
+          <p>Atendimento exclusivo para maiores de 18 anos.</p>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>&copy; 2026 Enigma Bar e Nightclub. Todos os direitos reservados.</span>
+        <span>Tradição, atmosfera e experiência na noite de Campo Grande.</span>
+      </div>
+    </footer>
+    <a href="https://wa.me/5565999999999?text=Olá%2C%20vim%20pelo%20site%20e%20quero%20mais%20informações%20sobre%20a%20Enigma." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp"><img src="assets/whatsapp-float.svg" alt=""></a>
+    <script src="script.js" defer></script>
+  </body>
+</html>
+

@@ -17,6 +17,16 @@ body {
   box-shadow: var(--shadow);
 }
 
+.adm-card {
+  display: grid;
+  gap: .95rem;
+}
+
+.adm-login {
+  display: grid;
+  gap: .85rem;
+}
+
 .adm-card label {
   display: grid;
   gap: .35rem;
@@ -47,6 +57,11 @@ body {
   overflow-x: auto;
   padding-bottom: .8rem;
   margin-bottom: 1rem;
+}
+
+.adm-grid {
+  display: grid;
+  gap: 1rem;
 }
 
 .adm-tab {
@@ -96,5 +111,10 @@ body {
 @media (min-width: 680px) {
   .adm-actions {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .adm-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
   }
 }
