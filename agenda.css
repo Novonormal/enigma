@@ -5,7 +5,7 @@
 }
 
 .agenda-card {
-  min-height: 360px;
+  aspect-ratio: 2 / 3;
   border: 1px solid rgba(231, 194, 123, .18);
   border-radius: var(--radius);
   overflow: hidden;
@@ -30,13 +30,13 @@
 .agenda-card img {
   width: 100%;
   height: 100%;
-  min-height: 360px;
   object-fit: cover;
   display: block;
 }
 
 .agenda-empty {
-  min-height: 360px;
+  width: 100%;
+  height: 100%;
   display: grid;
   place-items: center;
   padding: 2rem;
@@ -59,5 +59,4 @@
 
 @media (min-width: 1024px) {
   .agenda-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .agenda-card:first-child { grid-column: span 2; }
 }
