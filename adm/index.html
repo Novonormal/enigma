@@ -46,7 +46,6 @@
     </main>
     <script>
       const DAYS = [
-        ["segunda", "Segunda"],
         ["terca", "Terça"],
         ["quarta", "Quarta"],
         ["quinta", "Quinta"],
@@ -62,7 +61,7 @@
 
       let auth = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null");
       let agenda = { days: {} };
-      let currentDay = "segunda";
+      let currentDay = "terca";
 
       const basicAuth = () => `Basic ${btoa(`${auth.user}:${auth.pass}`)}`;
       const setStatus = (text) => { $("panel-status").textContent = text || ""; };

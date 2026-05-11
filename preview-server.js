@@ -35,7 +35,6 @@ const serve = (res, file) => {
 const emptyAgenda = () => ({
   updatedAt: null,
   days: {
-    segunda: null,
     terca: null,
     quarta: null,
     quinta: null,
@@ -120,7 +119,7 @@ http
           return res.end(JSON.stringify({ ok: true }));
         }
 
-        const days = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"];
+        const days = ["terca", "quarta", "quinta", "sexta", "sabado", "domingo"];
         if (!days.includes(body.day)) {
           res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
           return res.end(JSON.stringify({ error: "dia invalido" }));

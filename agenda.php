@@ -56,7 +56,7 @@ $days = enigma_day_order();
         <div class="container page-hero-content reveal">
           <p class="eyebrow">Agenda</p>
           <h1>Flyers da semana</h1>
-          <p>Eventos da Enigma organizados de segunda a domingo.</p>
+          <p>Eventos da Enigma organizados de terça a domingo.</p>
         </div>
       </section>
       <section class="section">
@@ -119,4 +119,3 @@ $days = enigma_day_order();
     <script src="script.js" defer></script>
   </body>
 </html>
-

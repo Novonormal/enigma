@@ -1,5 +1,4 @@
 const AGENDA_DAYS = [
-  ["segunda", "Segunda"],
   ["terca", "Terça"],
   ["quarta", "Quarta"],
   ["quinta", "Quinta"],

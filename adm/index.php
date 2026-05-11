@@ -8,9 +8,9 @@ $adminPass = getenv('ADMIN_PASS') ?: 'enigma2026';
 $uploadDir = enigma_upload_dir();
 $agenda = enigma_load_agenda();
 $days = enigma_day_order();
-$currentDay = $_GET['day'] ?? $_POST['day'] ?? 'segunda';
+$currentDay = $_GET['day'] ?? $_POST['day'] ?? 'terca';
 if (!in_array($currentDay, $days, true)) {
-  $currentDay = 'segunda';
+  $currentDay = 'terca';
 }
 
 function adm_flash(string $message): void

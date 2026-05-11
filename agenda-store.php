@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 const ENIGMA_AGENDA_DAYS = [
-  'segunda' => 'Segunda',
   'terca' => 'Terça',
   'quarta' => 'Quarta',
   'quinta' => 'Quinta',
@@ -122,4 +121,3 @@ function enigma_clean_uploaded_name(string $name): string
   $name = preg_replace('/[^a-zA-Z0-9._-]+/', '-', $name) ?? 'file';
   return trim($name, '-._');
 }
-
