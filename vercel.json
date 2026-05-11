@@ -1,5 +1,44 @@
 {
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sobre.html",
+      "destination": "/sobre",
+      "permanent": true
+    },
+    {
+      "source": "/servicos.html",
+      "destination": "/servicos",
+      "permanent": true
+    },
+    {
+      "source": "/contato.html",
+      "destination": "/contato",
+      "permanent": true
+    },
+    {
+      "source": "/agenda.html",
+      "destination": "/agenda",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/sobre",
+      "destination": "/sobre.html"
+    },
+    {
+      "source": "/servicos",
+      "destination": "/servicos.html"
+    },
+    {
+      "source": "/contato",
+      "destination": "/contato.html"
+    },
     {
       "source": "/agenda",
       "destination": "/agenda.html"

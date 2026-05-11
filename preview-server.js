@@ -171,12 +171,20 @@ http
       })();
     }
 
-    if (urlPath === "/" || urlPath === "/index.html") return serve(res, path.join(base, "index.html"));
-    if (urlPath === "/sobre.html") return serve(res, path.join(base, "sobre.html"));
-    if (urlPath === "/servicos.html") return serve(res, path.join(base, "servicos.html"));
-    if (urlPath === "/contato.html") return serve(res, path.join(base, "contato.html"));
+    if (urlPath === "/index.html") {
+      res.writeHead(301, { Location: "/" });
+      return res.end();
+    }
+    if (urlPath.endsWith(".html")) {
+      res.writeHead(301, { Location: urlPath.replace(/\.html$/, "") });
+      return res.end();
+    }
+
+    if (urlPath === "/") return serve(res, path.join(base, "index.html"));
+    if (urlPath === "/sobre" || urlPath === "/sobre/") return serve(res, path.join(base, "sobre.html"));
+    if (urlPath === "/servicos" || urlPath === "/servicos/") return serve(res, path.join(base, "servicos.html"));
+    if (urlPath === "/contato" || urlPath === "/contato/") return serve(res, path.join(base, "contato.html"));
     if (urlPath === "/agenda" || urlPath === "/agenda/") return serve(res, path.join(base, "agenda.html"));
-    if (urlPath === "/agenda.html") return serve(res, path.join(base, "agenda.html"));
     if (urlPath === "/adm" || urlPath === "/adm/") return serve(res, path.join(base, "adm/index.html"));
     if (urlPath === "/adm/index.html") return serve(res, path.join(base, "adm/index.html"));
 

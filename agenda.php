@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 declare(strict_types=1);
 require_once __DIR__ . '/agenda-store.php';
 
@@ -38,14 +38,14 @@ $days = enigma_day_order();
     </div>
     <header class="site-header" data-header>
       <div class="container header-inner">
-        <a href="index.html" class="logo" aria-label="Enigma Bar e Nightclub - Página inicial"><img src="assets/images/logo-enigma.png" alt="Logo Enigma"></a>
+        <a href="/" class="logo" aria-label="Enigma Bar e Nightclub - Página inicial"><img src="assets/images/logo-enigma.png" alt="Logo Enigma"></a>
         <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" data-menu-toggle><span></span><span></span><span></span></button>
         <nav class="main-nav" data-menu>
-          <a href="index.html" data-nav="home">Início</a>
-          <a href="sobre.html" data-nav="sobre">A Casa</a>
-          <a href="servicos.html" data-nav="servicos">Serviços</a>
+          <a href="/" data-nav="home">Início</a>
+          <a href="/sobre" data-nav="sobre">A Casa</a>
+          <a href="/servicos" data-nav="servicos">Serviços</a>
           <a href="/agenda" data-nav="agenda">Agenda</a>
-          <a href="contato.html" data-nav="contato">Contato</a>
+          <a href="/contato" data-nav="contato">Contato</a>
         </nav>
         <a class="btn btn-primary header-cta" href="#" data-whatsapp data-message="Olá, quero reservar na Enigma.">Reservar</a>
       </div>
@@ -89,11 +89,11 @@ $days = enigma_day_order();
         </div>
         <nav class="footer-col" aria-label="Links principais">
           <h3>Navegação</h3>
-          <a href="index.html">Início</a>
-          <a href="sobre.html">A Casa</a>
-          <a href="servicos.html">Serviços</a>
+          <a href="/">Início</a>
+          <a href="/sobre">A Casa</a>
+          <a href="/servicos">Serviços</a>
           <a href="/agenda">Agenda</a>
-          <a href="contato.html">Contato</a>
+          <a href="/contato">Contato</a>
         </nav>
         <div class="footer-col">
           <h3>Serviços</h3>
