@@ -517,14 +517,8 @@ cite { color: var(--gold); font-style: normal; font-size: .88rem; }
 }
 
 @media (min-width: 980px) {
-  .model-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .model-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .model-grid .visual-card { min-height: 360px; }
-  .model-grid .visual-card:nth-child(1),
-  .model-grid .visual-card:nth-child(2) { grid-column: span 2; }
-  .model-grid .visual-card:nth-child(3),
-  .model-grid .visual-card:nth-child(4),
-  .model-grid .visual-card:nth-child(5),
-  .model-grid .visual-card:nth-child(6) { grid-column: span 1; }
 }
 
 @media (min-width: 900px) {
