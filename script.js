@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "5565999999999";
+const WHATSAPP_NUMBER = "556791723390";
 const DEFAULT_MESSAGE = "Olá, vim pelo site e quero mais informações sobre a Enigma.";
 
 const buildWhatsAppUrl = (message = DEFAULT_MESSAGE) =>
