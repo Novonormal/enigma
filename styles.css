@@ -263,6 +263,7 @@ p { margin: 0; color: rgba(255,243,223,.78); font-size: 1rem; line-height: 1.78;
 .highlight strong { display: block; color: var(--cream); font-family: var(--font-display); font-size: 1.45rem; font-weight: 400; }
 
 .visual-grid { display: grid; gap: 1rem; }
+.model-grid { display: grid; gap: 1rem; }
 .visual-card, .service-card, .testimonial-card, .contact-card, .history-card, .map-card {
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -282,6 +283,7 @@ p { margin: 0; color: rgba(255,243,223,.78); font-size: 1rem; line-height: 1.78;
 }
 .visual-card:hover::before, .service-card:hover::before, .testimonial-card:hover::before, .contact-card:hover::before, .history-card:hover::before { opacity: 1; }
 .visual-card { min-height: 360px; }
+.model-grid .visual-card { min-height: 420px; aspect-ratio: 2 / 3; }
 .visual-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
 .visual-card.portrait-card img { object-position: center top; }
 .visual-card:hover img { transform: scale(1.025); }
@@ -509,8 +511,20 @@ cite { color: var(--gold); font-style: normal; font-size: .88rem; }
 @media (min-width: 680px) {
   .highlight-row, .service-grid, .testimonial-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .visual-grid { grid-template-columns: 1.15fr .85fr; }
+  .model-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .visual-card.large { grid-row: span 2; }
   .hours-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
+}
+
+@media (min-width: 980px) {
+  .model-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .model-grid .visual-card { min-height: 360px; }
+  .model-grid .visual-card:nth-child(1),
+  .model-grid .visual-card:nth-child(2) { grid-column: span 2; }
+  .model-grid .visual-card:nth-child(3),
+  .model-grid .visual-card:nth-child(4),
+  .model-grid .visual-card:nth-child(5),
+  .model-grid .visual-card:nth-child(6) { grid-column: span 1; }
 }
 
 @media (min-width: 900px) {
