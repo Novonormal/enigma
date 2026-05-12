@@ -6,7 +6,7 @@ RewriteRule ^index\.html$ / [R=301,L]
 RewriteCond %{THE_REQUEST} \s/+(.+)\.html[\s?] [NC]
 RewriteRule ^(.+)\.html$ /$1 [R=301,L]
 
-RewriteRule ^agenda/?$ agenda.php [L,QSA]
+RewriteRule ^agenda/?$ agenda.html [L,QSA]
 RewriteRule ^adm/?$ adm/index.php [L,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-d
